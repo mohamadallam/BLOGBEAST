@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// notistack
+import { SnackbarProvider } from "notistack";
+// material ThemeProvider
+import { ThemeProvider } from "@mui/material/styles";
+import Notification from "./components/Notification";
+// Layouts
+import Layout from "./hoc/Layout";
+// routes
+import Routes from "./routes";
+import theme from "./theme";
 
+import setUpInterceptor from "./axios/interceptor";
+import { useDispatch } from "react-redux";
 function App() {
+  const dispatch = useDispatch();
+  setUpInterceptor(dispatch); //<-- initialize the interceptor
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider maxSnack={4} preventDuplicate>
+        <Notification />
+        <Layout>
+          <Routes />
+        </Layout>
+      </SnackbarProvider>
+    </ThemeProvider>
   );
 }
 
