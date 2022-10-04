@@ -2,8 +2,8 @@
 
 BlogBeast is a simple blog (It is built quickly and has few functions), user can sign in, view, and filter articles.
 
-![Screenshot](assets/screencapture-dashboard.png)
-![Screenshot](assets/screencapture-login.png)
+![dashboard](/src//assets/screencapture-dashboard.png)
+![login](/src/assets/screencapture-login.png)
 
 ## How to run
 
