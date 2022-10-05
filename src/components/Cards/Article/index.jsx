@@ -6,8 +6,11 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
-function ArticleCard(props) {
+import Link from "@mui/material/Link";
+import PanoramaIcon from "@mui/icons-material/Panorama";
+import { Link as RouterLink } from "react-router-dom";
+import Moment from "react-moment";
+function Article(props) {
   const { article } = props;
   const maxLine = {
     display: "-webkit-box",
@@ -17,7 +20,7 @@ function ArticleCard(props) {
     height: 56,
   };
   return (
-    <CardActionArea component={Link} to="/">
+    <CardActionArea component={"div"}>
       <Card sx={{ display: "flex" }}>
         <CardContent sx={{ flex: 1 }}>
           <Typography
@@ -28,7 +31,7 @@ function ArticleCard(props) {
             {article.title}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" sx={{ my: 2 }}>
-            {article.date}
+            <Moment fromNow>{new Date(article.date)}</Moment>
           </Typography>
           <Typography
             variant="subtitle1"
@@ -37,9 +40,9 @@ function ArticleCard(props) {
           >
             {article.description}
           </Typography>
-          <Typography variant="subtitle1" color="primary">
-            Continue reading...
-          </Typography>
+          <Link variant="subtitle1" to={article.link} component={RouterLink}>
+            {article.linkText}
+          </Link>
         </CardContent>
         {article.image ? (
           <CardMedia
@@ -49,24 +52,29 @@ function ArticleCard(props) {
           />
         ) : (
           <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             sx={{
               width: 160,
-              display: { xs: "none", sm: "block" },
-              backgroundColor: "primary.dark",
             }}
-          />
+          >
+            <PanoramaIcon color="primary" sx={{ fontSize: 60 }} />
+          </Box>
         )}
       </Card>
     </CardActionArea>
   );
 }
 
-ArticleCard.propTypes = {
+Article.propTypes = {
   article: PropTypes.shape({
     date: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    linkText: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default ArticleCard;
+export default Article;

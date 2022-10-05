@@ -10,7 +10,7 @@ export default function Layout(props) {
     <>
       {loading && (
         <LinearProgress
-          color="primary"
+          color="secondary"
           sx={{
             position: "fixed",
             top: 0,

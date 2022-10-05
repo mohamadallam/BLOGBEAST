@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { MenuItem, Menu, Box, Button, Tooltip } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useDispatch } from "react-redux";
 export default function NavItems() {
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ export default function NavItems() {
           onClick={(e) => handleClick(e, link, key)}
           sx={{
             my: 2,
+            color: "white",
           }}
         >
           {link?.name}
@@ -63,7 +65,13 @@ export default function NavItems() {
                 cursor: "pointer",
                 color: "#fff",
               }}
-              endIcon={<KeyboardArrowDownIcon />}
+              endIcon={
+                Boolean(menus[key]) ? (
+                  <KeyboardArrowUpIcon />
+                ) : (
+                  <KeyboardArrowDownIcon />
+                )
+              }
             >
               {link?.name}
             </Button>
