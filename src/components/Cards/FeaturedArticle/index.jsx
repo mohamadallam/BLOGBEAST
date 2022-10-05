@@ -13,8 +13,7 @@ function FeaturedArticle(props) {
     display: "-webkit-box",
     overflow: "hidden",
     WebkitBoxOrient: "vertical",
-    WebkitLineClamp: 4,
-    height: 56,
+    WebkitLineClamp: 2,
   };
   return (
     <Paper
@@ -50,7 +49,7 @@ function FeaturedArticle(props) {
         }}
       />
       <Grid container>
-        <Grid item md={6}>
+        <Grid item md={11}>
           <Box
             sx={{
               position: "relative",
@@ -59,8 +58,8 @@ function FeaturedArticle(props) {
             }}
           >
             <Typography
-              component="h1"
-              variant="h3"
+              component="h2"
+              variant={window.innerWidth > 768 ? "h4" : "h6"}
               color="inherit"
               gutterBottom
               sx={{ ...maxLine, WebkitLineClamp: 2 }}
@@ -71,10 +70,10 @@ function FeaturedArticle(props) {
               <Moment fromNow>{new Date(article.date)}</Moment>
             </Typography>
             <Typography
-              variant="h5"
+              variant={window.innerWidth > 768 ? "h6" : "subtitle1"}
               color="inherit"
               paragraph
-              sx={{ ...maxLine, WebkitLineClamp: 3 }}
+              sx={{ ...maxLine, WebkitLineClamp: 4 }}
             >
               {article.description}
             </Typography>

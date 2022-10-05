@@ -13,26 +13,21 @@ export default function Notification() {
   const { snackbar } = useSelector(mapState);
   const key = snackbar?.key || uuid();
   const { enqueueSnackbar } = useSnackbar();
-  function onExited(key) {
-    dispatch(Close(key));
-  }
+
   useEffect(() => {
     if (snackbar && snackbar?.message) {
-      pushSnackbar();
+      let variant = "info";
+      if (snackbar.variant) {
+        variant = snackbar.variant;
+      }
+      enqueueSnackbar(snackbar.message, {
+        variant: variant,
+        autoHideDuration: 5000,
+        key,
+        onExited: () => dispatch(Close(key)),
+      });
     }
-  }, [snackbar]);
+  }, [snackbar, enqueueSnackbar, key, dispatch]);
 
-  function pushSnackbar() {
-    let variant = "info";
-    if (snackbar.variant) {
-      variant = snackbar.variant;
-    }
-    enqueueSnackbar(snackbar.message, {
-      variant: variant,
-      autoHideDuration: 5000,
-      key,
-      onExited: () => onExited(key),
-    });
-  }
   return <></>;
 }

@@ -25,7 +25,7 @@ function Article(props) {
         <CardContent sx={{ flex: 1 }}>
           <Typography
             component="h2"
-            variant="h5"
+            variant={window.innerWidth > 768 ? "h5" : "body1"}
             sx={{ ...maxLine, WebkitLineClamp: 2 }}
           >
             {article.title}
@@ -34,7 +34,7 @@ function Article(props) {
             <Moment fromNow>{new Date(article.date)}</Moment>
           </Typography>
           <Typography
-            variant="subtitle1"
+            variant={window.innerWidth > 768 ? "subtitle1" : "subtitle2"}
             paragraph
             sx={{ ...maxLine, height: 112 }}
           >
